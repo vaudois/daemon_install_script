@@ -1,18 +1,17 @@
 #!/bin/bash
 ################################################################################
-# Original Author:   crombiecrunch
-# Modified by : Xavatar (https://github.com/xavatar/yiimp_install_scrypt)
-# Web: https://www.xavatar.com    
+# Original Author:   Afiniel
+# Modified by : Afiniel (https://github.com/Afiniel/yiimp_install_scrypt)
+# Web: https://www.afiniel.xyz    
 #
-#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
-#   v0.2 (update Avril, 2020)
+#   Install Daemon Coin on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
+#   v0.2 (update Juillet, 2022)
 #
-# Current modified by : Afiniel
-# web: https://www.afiniel.xyz
+# Current modified by : Vaudois
+# web: https://coinXpool.com
 # Program:
-#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
-#   v0.3 (2022-06-14 Fixed solo fee in serverconfig.php)
-#        (2022-06-14 added block.sql and coins_thepool_life.sql dump)
+#   Install Daemon Coin on Ubuntu 16.04/18.04
+#   v0.1 (2022-07-17)
 # 
 ################################################################################
 	
@@ -41,7 +40,7 @@
      #Copy needed files
     cd
     sudo mkdir buildcoin
-    cd $HOME/yiimp_install_script
+    cd $HOME/daemon_install_script
     sudo cp -r conf/functions.sh /etc/
     sudo cp -r utils/screen-scrypt.sh /etc/
     sudo cp -r utils/screen-stratum.sh /etc/

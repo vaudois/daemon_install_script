@@ -20,11 +20,11 @@ sudo apt-get update && sudo apt-get upgrade -y
 ```
 To create your new user and.
 ```
-adduser pool
+adduser daemon
 ```
 To add you new user to sudo group
 ```
-adduser pool sudo
+adduser daemon sudo
 ```
 ###
 

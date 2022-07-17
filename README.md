@@ -32,7 +32,7 @@ adduser daemon sudo
 - > Be sure you are have su in to your pool user before you clone it, else you clone it to root user
 
 ```
-sudo su pool
+sudo su daemon
 ```
 ### clone the git repo.
 ```

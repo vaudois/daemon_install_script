@@ -41,16 +41,16 @@ function install_end_message {
 	clear
     echo                                                                                                                          
 	figlet -f slant -w 100 "Complete!"  
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-    echo -e "$YELLOW Daemon Script By Vaudois                      								$COL_RESET"
-	echo -e "$GREEN	Donations are welcome at wallets below:					  					$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-	echo -e "$CYAN 	https://github.com/vaudois/daemon_install_script							$COL_RESET"
-	echo -e "$CYAN  ---------------------------------------------------------------------------  $COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	$COL_RESET"
+    echo -e "$YELLOW Daemon Script By Vaudois                      					$COL_RESET"
+	echo -e "$GREEN	Donations are welcome at wallets below:					  	$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	$COL_RESET"
+	echo -e "$CYAN 	https://github.com/vaudois/daemon_install_script				$COL_RESET"
+	echo -e "$CYAN  ---------------------------------------------------------------------------  	$COL_RESET"
 	echo
-	echo -e "$CYAN  --------------------------------------------------------- 					 $COL_RESET"
-    echo -e "$RED   YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION Thanks you!					 $COL_RESET"
-    echo -e "$CYAN  ---------------------------------------------------------   			     $COL_RESET"
+	echo -e "$CYAN  ---------------------------------------------------------------------------	$COL_RESET"
+    echo -e "$RED   YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION Thanks you!				$COL_RESET"
+    echo -e "$CYAN  ---------------------------------------------------------   			$COL_RESET"
     echo
 }
 

@@ -51,6 +51,7 @@ OR
 ### all in one go in one line.
 ```
 git clone https://github.com/vaudois/daemon_install_script.git && cd daemon_install_script && bash install.sh
+```
 
 - > It will take some time for the installation to be finnished and it will do for you.
 

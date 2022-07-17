@@ -150,7 +150,11 @@
 	cd $HOME/daemon_setup/tmp
 	echo -e "$GREEN Additional System Files Completed...$COL_RESET"
 
+	echo
+	echo
 	echo -e "$YELLOW Building Berkeley 4.8, this may take several minutes...$COL_RESET"
+	echo
+	sleep 3
 	sudo mkdir -p $HOME/utils/berkeley/db4/
 	hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 	hide_output sudo tar -xzvf db-4.8.30.NC.tar.gz
@@ -161,7 +165,11 @@
 	sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
 	echo -e "$GREEN Berkeley 4.8 Completed...$COL_RESET"
 
+	echo
+	echo
 	echo -e "$YELLOW Building Berkeley 5.1, this may take several minutes...$COL_RESET"
+	echo
+	sleep 3
 	sudo mkdir -p $HOME/utils/berkeley/db5/
 	hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-5.1.29.tar.gz'
 	hide_output sudo tar -xzvf db-5.1.29.tar.gz
@@ -172,7 +180,11 @@
 	sudo rm -r db-5.1.29.tar.gz db-5.1.29
 	echo -e "$GREEN Berkeley 5.1 Completed...$COL_RESET"
 
+	echo
+	echo
 	echo -e "$YELLOW Building Berkeley 5.3, this may take several minutes...$COL_RESET"
+	echo
+	sleep 3
 	sudo mkdir -p $HOME/utils/berkeley/db5.3/
 	hide_output sudo wget 'http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
 	hide_output sudo tar -xzvf db-5.3.28.tar.gz
@@ -183,7 +195,11 @@
 	sudo rm -r db-5.3.28.tar.gz db-5.3.28
 	echo -e "$GREEN Berkeley 5.3 Completed...$COL_RESET"
 
+	echo
+	echo
 	echo -e "$YELLOW Building Berkeley 6.2, this may take several minutes...$COL_RESET"
+	echo
+	sleep 3
 	sudo mkdir -p $HOME/utils/berkeley/db6.2/
 	hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz'
 	hide_output sudo tar -xzvf db-6.2.23.tar.gz
@@ -194,7 +210,11 @@
 	sudo rm -r db-6.2.23.tar.gz db-6.2.23
 	echo -e "$GREEN Berkeley 6.2 Completed...$COL_RESET"
 
+	echo
+	echo
 	echo -e "$YELLOW Building OpenSSL 1.0.2g, this may take several minutes...$COL_RESET"
+	echo
+	sleep 3
 	cd $HOME/daemon_setup/tmp
 	hide_output sudo wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2g.tar.gz --no-check-certificate
 	hide_output sudo tar -xf openssl-1.0.2g.tar.gz
@@ -206,7 +226,11 @@
 	sudo rm -r openssl-1.0.2g.tar.gz openssl-1.0.2g
 	echo -e "$GREEN OpenSSL 1.0.2g Completed...$COL_RESET"
 
+	echo
+	echo
 	echo -e "$YELLOW Building bls-signatures, this may take several minutes...$COL_RESET"
+	echo
+	sleep 3
 	cd $HOME/daemon_setup/tmp
 	hide_output sudo wget 'https://github.com/codablock/bls-signatures/archive/v20181101.zip'
 	hide_output sudo unzip v20181101.zip

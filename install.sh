@@ -15,6 +15,7 @@
 # 
 ################################################################################
 	
+	clear
 
 	output() {
 	printf "\E[0;33;40m"
@@ -49,12 +50,11 @@
 	sudo cp -r conf/editconf.py /usr/bin/
 	sudo chmod +x /usr/bin/editconf.py
 	sudo chmod +x /etc/screen-scrypt.sh
-	sudo chmod 755 /usr/bin/addport.
+	sudo chmod 755 /usr/bin/addport
 
 	source /etc/functions.sh
 
 	term_art
-
 
 	# Update package and Upgrade Ubuntu
 	echo
@@ -70,11 +70,9 @@
 	apt_install dialog python3 python3-pip acl nano apt-transport-https figlet
 	echo -e "$GREEN Done...$COL_RESET"
 
-
 	source conf/prerequisite.sh
 	sleep 3
 	source conf/getip.sh
-
 
 	echo 'PUBLIC_IP='"${PUBLIC_IP}"'
 	PUBLIC_IPV6='"${PUBLIC_IPV6}"'

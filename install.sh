@@ -151,44 +151,44 @@
 	echo -e "$GREEN Additional System Files Completed...$COL_RESET"
 
 	echo -e "$YELLOW Building Berkeley 4.8, this may take several minutes...$COL_RESET"
-	sudo mkdir -p $HOME/daemoncoin/berkeley/db4/
+	sudo mkdir -p $HOME/utils/berkeley/db4/
 	hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 	hide_output sudo tar -xzvf db-4.8.30.NC.tar.gz
 	cd db-4.8.30.NC/build_unix/
-	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/daemoncoin/berkeley/db4/
+	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/utils/berkeley/db4/
 	hide_output sudo make install
 	cd $HOME/daemon_setup/tmp
 	sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
 	echo -e "$GREEN Berkeley 4.8 Completed...$COL_RESET"
 
 	echo -e "$YELLOW Building Berkeley 5.1, this may take several minutes...$COL_RESET"
-	sudo mkdir -p $HOME/daemoncoin/berkeley/db5/
+	sudo mkdir -p $HOME/utils/berkeley/db5/
 	hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-5.1.29.tar.gz'
 	hide_output sudo tar -xzvf db-5.1.29.tar.gz
 	cd db-5.1.29/build_unix/
-	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/daemoncoin/berkeley/db5/
+	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/utils/berkeley/db5/
 	hide_output sudo make install
 	cd $HOME/daemon_setup/tmp
 	sudo rm -r db-5.1.29.tar.gz db-5.1.29
 	echo -e "$GREEN Berkeley 5.1 Completed...$COL_RESET"
 
 	echo -e "$YELLOW Building Berkeley 5.3, this may take several minutes...$COL_RESET"
-	sudo mkdir -p $HOME/daemoncoin/berkeley/db5.3/
+	sudo mkdir -p $HOME/utils/berkeley/db5.3/
 	hide_output sudo wget 'http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
 	hide_output sudo tar -xzvf db-5.3.28.tar.gz
 	cd db-5.3.28/build_unix/
-	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/daemoncoin/berkeley/db5.3/
+	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/utils/berkeley/db5.3/
 	hide_output sudo make install
 	cd $HOME/daemon_setup/tmp
 	sudo rm -r db-5.3.28.tar.gz db-5.3.28
 	echo -e "$GREEN Berkeley 5.3 Completed...$COL_RESET"
 
 	echo -e "$YELLOW Building Berkeley 6.2, this may take several minutes...$COL_RESET"
-	sudo mkdir -p $HOME/daemoncoin/berkeley/db6.2/
+	sudo mkdir -p $HOME/utils/berkeley/db6.2/
 	hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz'
 	hide_output sudo tar -xzvf db-6.2.23.tar.gz
 	cd db-6.2.23/build_unix/
-	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/daemoncoin/berkeley/db6.2/
+	hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$HOME/utils/berkeley/db6.2/
 	hide_output sudo make install
 	cd $HOME/daemon_setup/tmp
 	sudo rm -r db-6.2.23.tar.gz db-6.2.23
@@ -199,7 +199,7 @@
 	hide_output sudo wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2g.tar.gz --no-check-certificate
 	hide_output sudo tar -xf openssl-1.0.2g.tar.gz
 	cd openssl-1.0.2g
-	hide_output sudo ./config --prefix=$HOME/daemoncoin/openssl --openssldir=$HOME/daemoncoin/openssl shared zlib
+	hide_output sudo ./config --prefix=$HOME/utils/openssl --openssldir=$HOME/utils/openssl shared zlib
 	hide_output sudo make
 	hide_output sudo make install
 	cd $HOME/daemon_setup/tmp

@@ -45,12 +45,13 @@
     sudo cp -r utils/screen-scrypt.sh /etc/
     sudo cp -r utils/screen-stratum.sh /etc/
     sudo cp -r utils/builder.sh $HOME/buildcoin
+	sudo cp -r utils/addport /usr/bin/
     sudo cp -r conf/editconf.py /usr/bin/
     sudo chmod +x /usr/bin/editconf.py
     sudo chmod +x /etc/screen-scrypt.sh
+	sudo chmod 755 /usr/bin/addport.
 
     source /etc/functions.sh
-
 
     term_art
 
@@ -84,115 +85,21 @@
     echo
     echo -e "$RED Make sure you double check before hitting enter! Only one shot at these! $COL_RESET"
     echo
-    #read -e -p "Enter time zone (e.g. America/New_York) : " TIME
-    read -e -p "Domain Name master server (Enter Domain name: example.com or ip of your server) : " server_name
-    #read -e -p "Are you using a subdomain (mycryptopool.example.com?) [y/N] : " sub_domain
+    read -e -p "Domain Name Stratum in MAIN server (Enter Domain name: stratum.example.com or ip of your server) : " server_name
+	read -e -p "Enter password for Stratum in MAIN server." stratum_password
+	read -e -p "Enter DATABASE name mysql in MAIN server." database_name
+	read -e -p "Enter USER mysql in MAIN server." user_database
+	read -e -p "Enter PASSWORD mysql in MAIN server." password_database
     read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
-    #read -e -p "Set Pool to AutoExchange? i.e. mine any coin with BTC address? [y/N] : " BTC
-    #read -e -p "Please enter a new location for /site/adminRights this is to customize the Admin Panel entrance url (e.g. myAdminpanel) : " admin_panel
-    #read -e -p "Enter the Public IP of the system you will use to access the admin panel (http://www.whatsmyip.org/) : " Public
-    #read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
-    #read -e -p "Install UFW and configure ports? [Y/n] : " UFW
-    #read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server  [Y/n]: " ssl_install
-    
     
     # Switch Aptitude
-    #echo
-    #echo -e "$CYAN Switching to Aptitude $COL_RESET"
-    #echo 
-    #sleep 3
-    #apt_install aptitude
-    #echo -e "$GREEN Done...$COL_RESET $COL_RESET"
+    echo
+    echo -e "$CYAN Switching to Aptitude $COL_RESET"
+    echo 
+    sleep 3
+    apt_install aptitude
+    echo -e "$GREEN Done...$COL_RESET $COL_RESET"
 
-
-    # Installing Nginx
-    #echo
-    #echo
-    #echo -e "$CYAN => Installing Nginx server : $COL_RESET"
-    #echo
-    #sleep 3
-    
-    #if [ -f /usr/sbin/apache2 ]; then
-    #echo -e "Removing apache..."
-    #hide_output apt-get -y purge apache2 apache2-*
-    #hide_output apt-get -y --purge autoremove
-    #fi
-
-    #apt_install nginx
-    #hide_output sudo rm /etc/nginx/sites-enabled/default
-    #hide_output sudo systemctl start nginx.service
-    #hide_output sudo systemctl enable nginx.service
-    #hide_output sudo systemctl start cron.service
-    #hide_output sudo systemctl enable cron.service
-    #sleep 5
-    #sudo systemctl status nginx | sed -n "1,3p"
-    #echo
-    #echo -e "$GREEN Done...$COL_RESET"
-	
-
-    # Making Nginx a bit hard
-    #echo 'map $http_user_agent $blockedagent {
-    #default         0;
-    #~*malicious     1;
-    #~*bot           1;
-    #~*backdoor      1;
-    #~*crawler       1;
-    #~*bandit        1;
-    #}
-    #' | sudo -E tee /etc/nginx/blockuseragents.rules >/dev/null 2>&1
-    
-    
-    # Installing Mariadb
-    #echo
-    #echo
-    #echo -e "$CYAN => Installing Mariadb Server : $COL_RESET"
-    #echo
-    #sleep 3
-        
-    # Create random password
-    #rootpasswd=$(openssl rand -base64 12)
-    #export DEBIAN_FRONTEND="noninteractive"
-    #apt_install mariadb-server
-    #hide_output sudo systemctl start mysql
-    #hide_output sudo systemctl enable mysql
-    #sleep 5
-    #sudo systemctl status mysql | sed -n "1,3p"
-    #echo
-    #echo -e "$GREEN Done...$COL_RESET"
-
-    
-    # Installing Installing php7.3
-    #echo
-    #echo
-    #echo -e "$CYAN => Installing php7.3 : $COL_RESET"
-    #echo
-    #sleep 3
-    
-    #source conf/pool.conf
-    #if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
-    #hide_output sudo add-apt-repository -y ppa:ondrej/php
-    #fi
-    #hide_output sudo apt -y update
-
-    #if [[ ("$DISTRO" == "16") ]]; then
-    #apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
-    #php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
-    #php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
-    ##hide_output sudo phpenmod mcrypt
-    ##hide_output sudo phpenmod mbstring
-    #else
-    #apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
-    #php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
-    #php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring \
-    #libpsl-dev libnghttp2-dev
-    #fi
-    #sleep 5
-    #hide_output sudo systemctl start php7.3-fpm
-    #sudo systemctl status php7.3-fpm | sed -n "1,3p"
-    #echo
-    #echo -e "$GREEN Done...$COL_RESET"
-
-    
     # Installing other needed files
     echo
     echo
@@ -206,7 +113,6 @@
     echo -e "$GREEN Done...$COL_RESET"
 	sleep 3
 
-    
     # Installing Package to compile crypto currency
     echo
     echo
@@ -254,145 +160,33 @@
     fi
     fi
     echo -e "$GREEN Done...$COL_RESET"
-    
-    # Installing Fail2Ban & UFW
-    #echo
-    #echo
-    #echo -e "$CYAN => Some optional installs (Fail2Ban & UFW) $COL_RESET"
-    #echo
-    #sleep 3
-    
-    
-    #if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
-    #apt_install fail2ban
-    #sleep 5
-    #sudo systemctl status fail2ban | sed -n "1,3p"
-    #    fi
-
-
-    #if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-    #apt_install ufw
-    #hide_output sudo ufw default deny incoming
-    #hide_output sudo ufw default allow outgoing
-    #hide_output sudo ufw allow ssh
-    #hide_output sudo ufw allow http
-    #hide_output sudo ufw allow https
-    #hide_output sudo ufw allow 3333/tcp
-    #hide_output sudo ufw allow 3339/tcp
-    #hide_output sudo ufw allow 3334/tcp
-    #hide_output sudo ufw allow 3433/tcp
-    #hide_output sudo ufw allow 3555/tcp
-    #hide_output sudo ufw allow 3556/tcp
-    #hide_output sudo ufw allow 3573/tcp
-    #hide_output sudo ufw allow 3535/tcp
-    #hide_output sudo ufw allow 3533/tcp
-    #hide_output sudo ufw allow 3553/tcp
-    #hide_output sudo ufw allow 3633/tcp
-    #hide_output sudo ufw allow 3733/tcp
-    #hide_output sudo ufw allow 3636/tcp
-    #hide_output sudo ufw allow 3737/tcp
-    #hide_output sudo ufw allow 3739/tcp
-    #hide_output sudo ufw allow 3747/tcp
-    #hide_output sudo ufw allow 3833/tcp
-    #hide_output sudo ufw allow 3933/tcp
-    #hide_output sudo ufw allow 4033/tcp
-    #hide_output sudo ufw allow 4133/tcp
-    #hide_output sudo ufw allow 4233/tcp
-    #hide_output sudo ufw allow 4234/tcp
-    #hide_output sudo ufw allow 4333/tcp
-    #hide_output sudo ufw allow 4433/tcp
-    #hide_output sudo ufw allow 4533/tcp
-    #hide_output sudo ufw allow 4553/tcp
-    #hide_output sudo ufw allow 4633/tcp
-    #hide_output sudo ufw allow 4733/tcp
-    #hide_output sudo ufw allow 4833/tcp
-    #hide_output sudo ufw allow 4933/tcp
-    #hide_output sudo ufw allow 5033/tcp
-    #hide_output sudo ufw allow 5133/tcp
-    #hide_output sudo ufw allow 5233/tcp
-    #hide_output sudo ufw allow 5333/tcp
-    #hide_output sudo ufw allow 5433/tcp
-    #hide_output sudo ufw allow 5533/tcp
-    #hide_output sudo ufw allow 5733/tcp
-    #hide_output sudo ufw allow 5743/tcp
-    #hide_output sudo ufw allow 3252/tcp
-    #hide_output sudo ufw allow 5755/tcp
-    #hide_output sudo ufw allow 5766/tcp
-    #hide_output sudo ufw allow 5833/tcp
-    #hide_output sudo ufw allow 5933/tcp
-    #hide_output sudo ufw allow 6033/tcp
-    #hide_output sudo ufw allow 5034/tcp
-    #hide_output sudo ufw allow 6133/tcp
-    #hide_output sudo ufw allow 6233/tcp
-    #hide_output sudo ufw allow 6333/tcp
-    #hide_output sudo ufw allow 6433/tcp
-    #hide_output sudo ufw allow 7433/tcp
-    #hide_output sudo ufw allow 8333/tcp
-    #hide_output sudo ufw allow 8463/tcp
-    #hide_output sudo ufw allow 8433/tcp
-    #hide_output sudo ufw allow 8533/tcp
-    #hide_output sudo ufw --force enable
-    #sleep 5
-    #sudo systemctl status ufw | sed -n "1,3p"   
-    #fi
-
-    
-    #echo
-    #echo -e "$GREEN Done...$COL_RESET"
-
-    
-    # Installing PhpMyAdmin
-    #echo
-    #echo
-    #echo -e "$CYAN => Installing phpMyAdmin $COL_RESET"
-    #echo
-    #sleep 3
-    
-    #echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect" | sudo debconf-set-selections
-    #echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
-    #echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | sudo debconf-set-selections
-    #echo "phpmyadmin phpmyadmin/mysql/admin-pass password $rootpasswd" | sudo debconf-set-selections
-    #echo "phpmyadmin phpmyadmin/mysql/app-pass password $AUTOGENERATED_PASS" | sudo debconf-set-selections
-    #echo "phpmyadmin phpmyadmin/app-password-confirm password $AUTOGENERATED_PASS" | sudo debconf-set-selections
-    #apt_install phpmyadmin
-    #echo -e "$GREEN Done...$COL_RESET"
 	
-	
-    # Installing Daemon
+    # Installing Stratum
     echo
     echo
-    echo -e "$CYAN => Installing Daemon Coin $COL_RESET"
+    echo -e "$CYAN => Installing Stratum $COL_RESET"
     echo
-    echo -e "Grabbing Daemon fron Github, building files and setting file structure."
+    echo -e "Grabbing Stratum fron Github, building files and setting file structure."
     echo
     sleep 3
-    
-
-    # Generating Random Password for stratum
-    blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
     
     # Compil Blocknotify
     cd ~
     hide_output git clone https://github.com/vaudois/stratum
     cd $HOME/stratum/blocknotify
-    sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
+    sudo sed -i 's/tu8tu5/'$stratum_password'/' blocknotify.cpp
     hide_output sudo make -j8
     
     # Compil iniparser
     cd $HOME/stratum/iniparser
     hide_output sudo make -j8
-    
-    # Compil Stratum
-    #stratumif [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then
+
     cd $HOME/stratum
-    #sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
-    #fi
+
     hide_output sudo make -j8
     
     # Copy Files (Blocknotify,iniparser,Stratum)
     cd $HOME/stratum
-    #sudo sed -i 's/myadmin/'AdminPanel'/' $HOME/yiimp/web/yaamp/modules/site/SiteController.php
-    #sudo cp -r $HOME/yiimp/web /var/
     sudo mkdir -p /var/stratum
     cd $HOME/stratum
     sudo cp -a config.sample/. /var/stratum/config
@@ -402,10 +196,6 @@
     sudo cp -r $HOME/stratum/bin/. /bin/
     sudo cp -r $HOME/stratum/blocknotify/blocknotify /usr/bin/
     sudo cp -r $HOME/stratum/blocknotify/blocknotify /var/stratum/
-    sudo mkdir -p /etc/yiimp
-    sudo mkdir -p /$HOME/backup/
-    #fixing yiimp
-    sudo sed -i "s|ROOTDIR=/data/yiimp|ROOTDIR=/var|g" /bin/yiimp
     #fixing run.sh
     sudo rm -r /var/stratum/config/run.sh
     echo '
@@ -439,666 +229,6 @@
     sudo systemctl status rsyslog | sed -n "1,3p"
     echo
     echo -e "$GREEN Done...$COL_RESET"
-    
-    
-    # Creating webserver initial config file
-    #echo
-    #echo
-    #echo -e "$CYAN => Creating webserver initial config file $COL_RESET"
-    #echo
-    
-    # Adding user to group, creating dir structure, setting permissions
-    #sudo mkdir -p /var/www/$server_name/html
-
-    #if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
-    #echo 'include /etc/nginx/blockuseragents.rules;
-	#server {
-	#if ($blockedagent) {
-    #            return 403;
-    #    }
-    #    if ($request_method !~ ^(GET|HEAD|POST)$) {
-    #    return 444;
-    #    }
-    #    listen 80;
-    #    listen [::]:80;
-    #    server_name '"${server_name}"';
-    #    root "/var/www/'"${server_name}"'/html/web";
-    #    index index.html index.htm index.php;
-    #    charset utf-8;
-    
-    #    location / {
-    #    try_files $uri $uri/ /index.php?$args;
-    #    }
-    #    location @rewrite {
-    #    rewrite ^/(.*)$ /index.php?r=$1;
-    #    }
-    
-    #    location = /favicon.ico { access_log off; log_not_found off; }
-    #    location = /robots.txt  { access_log off; log_not_found off; }
-    
-    #    access_log /var/log/nginx/'"${server_name}"'.app-access.log;
-    #    error_log /var/log/nginx/'"${server_name}"'.app-error.log;
-    
-    #    # allow larger file uploads and longer script runtimes
- 	#client_body_buffer_size  50k;
-    #    client_header_buffer_size 50k;
-    #    client_max_body_size 50k;
-    #    large_client_header_buffers 2 50k;
-    #    sendfile off;
-    
-    #    location ~ ^/index\.php$ {
-    #        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    #        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
-    #        fastcgi_index index.php;
-    #        include fastcgi_params;
-    #        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #        fastcgi_intercept_errors off;
-    #        fastcgi_buffer_size 16k;
-    #        fastcgi_buffers 4 16k;
-    #        fastcgi_connect_timeout 300;
-    #        fastcgi_send_timeout 300;
-    #        fastcgi_read_timeout 300;
-	#    try_files $uri $uri/ =404;
-    #    }
-	#	location ~ \.php$ {
-    #    	return 404;
-    #    }
-	#	location ~ \.sh {
-	#	return 404;
-    #    }
-	#	location ~ /\.ht {
-	#	deny all;
-    #    }
-	#	location ~ /.well-known {
-	#	allow all;
-    #    }
-	#	location /phpmyadmin {
-  	#	root /usr/share/;
-  	#	index index.php;
-  	#	try_files $uri $uri/ =404;
-  	#	location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-    #		deny all;
-  	#  }
-  	#	location ~ /phpmyadmin/(.+\.php)$ {
-    #		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-    #		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #		include fastcgi_params;
-    #		include snippets/fastcgi-php.conf;
-  	#    }
-    #  }
-    #}
-    #' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
-
-    #sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
-    #sudo ln -s /var/web /var/www/$server_name/html
-    #hide_output sudo systemctl reload php7.3-fpm.service
-    #hide_output sudo systemctl restart nginx.service
-    #echo -e "$GREEN Done...$COL_RESET"
-    	
-    #if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
-
-    
-    # Install SSL (with SubDomain)
-    #echo
-    #echo -e "Install LetsEncrypt and setting SSL (with SubDomain)"
-    #echo
-    
-    #apt_install letsencrypt
-    #sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name"
-    #sudo rm /etc/nginx/sites-available/$server_name.conf
-    #sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-    ## I am SSL Man!
-	#echo 'include /etc/nginx/blockuseragents.rules;
-	#server {
-	#if ($blockedagent) {
-    #            return 403;
-    #    }
-    #    if ($request_method !~ ^(GET|HEAD|POST)$) {
-    #    return 444;
-    #    }
-    #    listen 80;
-    #    listen [::]:80;
-    #    server_name '"${server_name}"';
-    #	# enforce https
-    #    return 301 https://$server_name$request_uri;
-	#}
-	
-	#server {
-	#if ($blockedagent) {
-    #            return 403;
-    #    }
-    #    if ($request_method !~ ^(GET|HEAD|POST)$) {
-    #    return 444;
-    #    }
-    #        listen 443 ssl http2;
-    #        listen [::]:443 ssl http2;
-    #        server_name '"${server_name}"';
-        
-    #        root /var/www/'"${server_name}"'/html/web;
-    #        index index.php;
-        
-    #        access_log /var/log/nginx/'"${server_name}"'.app-access.log;
-    #        error_log  /var/log/nginx/'"${server_name}"'.app-error.log;
-        
-    #        # allow larger file uploads and longer script runtimes
- 	#client_body_buffer_size  50k;
-    #    client_header_buffer_size 50k;
-    #    client_max_body_size 50k;
-    #    large_client_header_buffers 2 50k;
-    #    sendfile off;
-        
-    #        # strengthen ssl security
-    #        ssl_certificate /etc/letsencrypt/live/'"${server_name}"'/fullchain.pem;
-    #        ssl_certificate_key /etc/letsencrypt/live/'"${server_name}"'/privkey.pem;
-    #        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    #        ssl_prefer_server_ciphers on;
-    #        ssl_session_cache shared:SSL:10m;
-    #        ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";
-    #        ssl_dhparam /etc/ssl/certs/dhparam.pem;
-        
-    #        # Add headers to serve security related headers
-    #        add_header Strict-Transport-Security "max-age=15768000; preload;";
-    #        add_header X-Content-Type-Options nosniff;
-    #        add_header X-XSS-Protection "1; mode=block";
-    #        add_header X-Robots-Tag none;
-    #        add_header Content-Security-Policy "frame-ancestors 'self'";
-        
-    #    location / {
-    #    try_files $uri $uri/ /index.php?$args;
-    #    }
-    #    location @rewrite {
-    #    rewrite ^/(.*)$ /index.php?r=$1;
-    #    }
-    
-        
-    #        location ~ ^/index\.php$ {
-    #            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    #            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
-    #            fastcgi_index index.php;
-    #            include fastcgi_params;
-    #            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #            fastcgi_intercept_errors off;
-    #            fastcgi_buffer_size 16k;
-    #            fastcgi_buffers 4 16k;
-    #            fastcgi_connect_timeout 300;
-    #            fastcgi_send_timeout 300;
-    #            fastcgi_read_timeout 300;
-    #            include /etc/nginx/fastcgi_params;
-	#    	try_files $uri $uri/ =404;
-    #    }
-	#	location ~ \.php$ {
-    #    	return 404;
-    #    }
-	#	location ~ \.sh {
-	#	return 404;
-    #    }
-        
-    #        location ~ /\.ht {
-    #            deny all;
-    #        }
-	#    location /phpmyadmin {
-	#	root /usr/share/;
-  	#	index index.php;
-  	#	try_files $uri $uri/ =404;
-  	#	location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-    #		deny all;
-  	#}
-  	#	location ~ /phpmyadmin/(.+\.php)$ {
-    #		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-    #		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #		include fastcgi_params;
-    #		include snippets/fastcgi-php.conf;
-  	#   }
-    # }
-    #}
-        
-    #' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
-	#fi
-	
-	#hide_output sudo systemctl reload php7.3-fpm.service
-	#hide_output sudo systemctl restart nginx.service
-	#echo -e "$GREEN Done...$COL_RESET"
-	
-	
-	#else
-	#echo 'include /etc/nginx/blockuseragents.rules;
-	#server {
-	#if ($blockedagent) {
-    #           return 403;
-    #    }
-    #    if ($request_method !~ ^(GET|HEAD|POST)$) {
-    #    return 444;
-    #    }
-    #    listen 80;
-    #    listen [::]:80;
-    #    server_name '"${server_name}"' www.'"${server_name}"';
-    #    root "/var/www/'"${server_name}"'/html/web";
-    #    index index.html index.htm index.php;
-    #    charset utf-8;
-    
-    #    location / {
-    #    try_files $uri $uri/ /index.php?$args;
-    #    }
-    #    location @rewrite {
-    #    rewrite ^/(.*)$ /index.php?r=$1;
-    #    }
-    
-    #    location = /favicon.ico { access_log off; log_not_found off; }
-    #    location = /robots.txt  { access_log off; log_not_found off; }
-    
-    #    access_log /var/log/nginx/'"${server_name}"'.app-access.log;
-    #    error_log /var/log/nginx/'"${server_name}"'.app-error.log;
-    
-    #    # allow larger file uploads and longer script runtimes
- 	#client_body_buffer_size  50k;
-    #    client_header_buffer_size 50k;
-    #    client_max_body_size 50k;
-    #    large_client_header_buffers 2 50k;
-    #    sendfile off;
-    
-    #    location ~ ^/index\.php$ {
-    #        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    #        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
-    #        fastcgi_index index.php;
-    #        include fastcgi_params;
-    #        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #        fastcgi_intercept_errors off;
-    #        fastcgi_buffer_size 16k;
-    #        fastcgi_buffers 4 16k;
-    #        fastcgi_connect_timeout 300;
-    #        fastcgi_send_timeout 300;
-    #        fastcgi_read_timeout 300;
-	#    try_files $uri $uri/ =404;
-    #    }
-	#	location ~ \.php$ {
-    #    	return 404;
-    #    }
-	#	location ~ \.sh {
-	#	return 404;
-    #    }
-	#	location ~ /\.ht {
-	#	deny all;
-    #    }
-	#	location ~ /.well-known {
-	#	allow all;
-    #    }
-	#	location /phpmyadmin {
-  	#	root /usr/share/;
-  	#	index index.php;
-  	#	try_files $uri $uri/ =404;
-  	#	location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-    #		deny all;
-  	#}
-  	#	location ~ /phpmyadmin/(.+\.php)$ {
-    #		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-    #		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #		include fastcgi_params;
-    #		include snippets/fastcgi-php.conf;
-  	#    }
-    #  }
-    #}
-    #' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
-
-    #sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
-    #sudo ln -s /var/web /var/www/$server_name/html
-    #hide_output sudo systemctl reload php7.3-fpm.service
-    #hide_output sudo systemctl restart nginx.service
-    #echo -e "$GREEN Done...$COL_RESET"
-   
-	
-    #if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
-    
-    ## Install SSL (without SubDomain)
-    #echo
-    #echo -e "Install LetsEncrypt and setting SSL (without SubDomain)"
-    #echo
-    #sleep 3
-    
-    #apt_install letsencrypt
-    #sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name" -d www."$server_name"
-    #sudo rm /etc/nginx/sites-available/$server_name.conf
-    #sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-    ## I am SSL Man!
-	#echo 'include /etc/nginx/blockuseragents.rules;
-	#server {
-	#if ($blockedagent) {
-    #            return 403;
-    #    }
-    #    if ($request_method !~ ^(GET|HEAD|POST)$) {
-    #    return 444;
-    #    }
-    #    listen 80;
-    #    listen [::]:80;
-    #    server_name '"${server_name}"';
-    #	# enforce https
-    #    return 301 https://$server_name$request_uri;
-	#}
-	
-	#server {
-	#if ($blockedagent) {
-    #            return 403;
-    #    }
-    #    if ($request_method !~ ^(GET|HEAD|POST)$) {
-    #    return 444;
-    #    }
-    #        listen 443 ssl http2;
-    #        listen [::]:443 ssl http2;
-    #        server_name '"${server_name}"' www.'"${server_name}"';
-        
-    #        root /var/www/'"${server_name}"'/html/web;
-    #        index index.php;
-        
-    #        access_log /var/log/nginx/'"${server_name}"'.app-access.log;
-    #        error_log  /var/log/nginx/'"${server_name}"'.app-error.log;
-        
-            # allow larger file uploads and longer script runtimes
- 	#client_body_buffer_size  50k;
-    #    client_header_buffer_size 50k;
-    #    client_max_body_size 50k;
-    #    large_client_header_buffers 2 50k;
-    #    sendfile off;
-        
-    #        # strengthen ssl security
-    #        ssl_certificate /etc/letsencrypt/live/'"${server_name}"'/fullchain.pem;
-    #        ssl_certificate_key /etc/letsencrypt/live/'"${server_name}"'/privkey.pem;
-    #        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    #        ssl_prefer_server_ciphers on;
-    #        ssl_session_cache shared:SSL:10m;
-    #        ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";
-    #        ssl_dhparam /etc/ssl/certs/dhparam.pem;
-        
-    #        # Add headers to serve security related headers
-    #        add_header Strict-Transport-Security "max-age=15768000; preload;";
-    #        add_header X-Content-Type-Options nosniff;
-    #        add_header X-XSS-Protection "1; mode=block";
-    #        add_header X-Robots-Tag none;
-    #        add_header Content-Security-Policy "frame-ancestors 'self'";
-        
-    #    location / {
-    #    try_files $uri $uri/ /index.php?$args;
-    #    }
-    #    location @rewrite {
-    #    rewrite ^/(.*)$ /index.php?r=$1;
-    #    }
-    
-        
-    #        location ~ ^/index\.php$ {
-    #            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    #            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
-    #            fastcgi_index index.php;
-    #            include fastcgi_params;
-    #            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #            fastcgi_intercept_errors off;
-    #            fastcgi_buffer_size 16k;
-    #            fastcgi_buffers 4 16k;
-    #            fastcgi_connect_timeout 300;
-    #            fastcgi_send_timeout 300;
-    #            fastcgi_read_timeout 300;
-    #            include /etc/nginx/fastcgi_params;
-	#    	try_files $uri $uri/ =404;
-    #    }
-	#	location ~ \.php$ {
-    #    	return 404;
-    #    }
-	#	location ~ \.sh {
-	#	return 404;
-    #    }
-        
-    #        location ~ /\.ht {
-    #            deny all;
-    #        }
-	#    location /phpmyadmin {
-  	#	root /usr/share/;
-  	#	index index.php;
-  	#	try_files $uri $uri/ =404;
-  	#	location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-    #		deny all;
-  	#}
-  	#	location ~ /phpmyadmin/(.+\.php)$ {
-    #		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-    #		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    #		include fastcgi_params;
-    #		include snippets/fastcgi-php.conf;
-  	#   }
-    #  }
-    #}
-        
-    #' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
-
-	#echo -e "$GREEN Done...$COL_RESET"
-
-    #fi
-    #hide_output sudo systemctl reload php7.3-fpm.service
-    #hide_output sudo systemctl restart nginx.service
-    #fi
-    
-    
-    # Config Database
-    #echo
-    #echo
-    #echo -e "$CYAN => Now for the database fun! $COL_RESET"
-    #echo
-    #sleep 3
-    
-    # Create database
-    #Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend;"
-    #Q2="GRANT ALL ON *.* TO 'panel'@'localhost' IDENTIFIED BY '$password';"
-    #Q3="FLUSH PRIVILEGES;"
-    #SQL="${Q1}${Q2}${Q3}"
-    #sudo mysql -u root -p="" -e "$SQL"
-    
-    # Create stratum user
-    #Q1="GRANT ALL ON *.* TO 'stratum'@'localhost' IDENTIFIED BY '$password2';"
-    #Q2="FLUSH PRIVILEGES;"
-    #SQL="${Q1}${Q2}"
-    #sudo mysql -u root -p="" -e "$SQL"  
-    
-    #Create my.cnf
-    
-    #echo '
-    #[clienthost1]
-    #user=panel
-    #password='"${password}"'
-    #database=yiimpfrontend
-    #host=localhost
-    #[clienthost2]
-    #user=stratum
-    #password='"${password2}"'
-    #database=yiimpfrontend
-    #host=localhost
-    #[myphpadmin]
-    #user=phpmyadmin
-    #password='"${AUTOGENERATED_PASS}"'
-    #[mysql]
-    #user=root
-    #password='"${rootpasswd}"'
-    #' | sudo -E tee ~/.my.cnf >/dev/null 2>&1
-    #  sudo chmod 0600 ~/.my.cnf
-
-
-    # Create keys file
-    #echo '  
-    #<?php
-    #/* Sample config file to put in /etc/yiimp/keys.php */
-    #define('"'"'YIIMP_MYSQLDUMP_USER'"'"', '"'"'panel'"'"');
-    #define('"'"'YIIMP_MYSQLDUMP_PASS'"'"', '"'"''"${password}"''"'"');
-    #define('"'"'YIIMP_MYSQLDUMP_PATH'"'"', '"'"''"/var/yiimp/sauv"''"'"');
-    #/* Keys required to create/cancel orders and access your balances/deposit addresses */
-    #define('"'"'EXCH_BITTREX_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_BITSTAMP_SECRET'"'"','"'"''"'"');
-    #define('"'"'EXCH_BLEUTRADE_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_BTER_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_CCEX_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_COINMARKETS_PASS'"'"', '"'"''"'"');
-    #define('"'"'EXCH_CRYPTOPIA_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_KRAKEN_SECRET'"'"','"'"''"'"');
-    #define('"'"'EXCH_LIVECOIN_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_NOVA_SECRET'"'"','"'"''"'"');
-    #define('"'"'EXCH_POLONIEX_SECRET'"'"', '"'"''"'"');
-    #define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
-    #' | sudo -E tee /etc/yiimp/keys.php >/dev/null 2>&1
-
- 	#echo -e "$GREEN Done...$COL_RESET"
-
- 
-    # Peforming the SQL import
-    #echo
-    #echo
-    #echo -e "$CYAN => Database 'yiimpfrontend' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you $COL_RESET"
-    #echo
-    #echo -e "Performing the SQL import"
-    #echo
-    #sleep 3
-    
-    #cd ~
-    #cd yiimp/sql
-    
-    # Import sql dump
-    #sudo zcat 2020-11-10-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
-    
-    # Oh the humanity!
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-04-24-market_history.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-04-27-settings.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-05-11-coins.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-05-15-benchmarks.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-05-23-bookmarks.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-06-01-notifications.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-06-04-bench_chips.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2016-11-23-coins.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-02-05-benchmarks.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-03-31-earnings_index.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-05-accounts_case_swaptime.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-06-payouts_coinid_memo.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-09-notifications.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-10-bookmarks.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2018-09-22-workers.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2017-11-segwit.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2018-01-stratums_ports.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2019-03-coins_thepool_life.sql
-    #sudo mysql --defaults-group-suffix=host1 --force < 2020-06-03-blocks.sql
-    #echo -e "$GREEN Done...$COL_RESET"
-        
-    
-    # Generating a basic Yiimp serverconfig.php
-    #echo
-    #echo
-    #echo -e "$CYAN => Generating a basic Yiimp serverconfig.php $COL_RESET"
-    #echo
-    #sleep 3
-    
-    # Make config file
-    #echo '
-    #<?php
-    #ini_set('"'"'date.timezone'"'"', '"'"'UTC'"'"');
-    #define('"'"'YAAMP_LOGS'"'"', '"'"'/var/log/yiimp'"'"');
-    #define('"'"'YAAMP_HTDOCS'"'"', '"'"'/var/web'"'"');
-        
-    #define('"'"'YAAMP_BIN'"'"', '"'"'/var/bin'"'"');
-    
-    #define('"'"'YAAMP_DBHOST'"'"', '"'"'localhost'"'"');
-    #define('"'"'YAAMP_DBNAME'"'"', '"'"'yiimpfrontend'"'"');
-    #define('"'"'YAAMP_DBUSER'"'"', '"'"'panel'"'"');
-    #define('"'"'YAAMP_DBPASSWORD'"'"', '"'"''"${password}"''"'"');
-    
-    #define('"'"'YAAMP_PRODUCTION'"'"', true);
-    #define('"'"'YAAMP_RENTAL'"'"', false);
-    
-    #define('"'"'YAAMP_LIMIT_ESTIMATE'"'"', false);
-    
-    #define('"'"'YAAMP_FEES_SOLO'"'"', 0.5);
-    
-    #define('"'"'YAAMP_FEES_MINING'"'"', 0.5);
-    #define('"'"'YAAMP_FEES_EXCHANGE'"'"', 2);
-    #define('"'"'YAAMP_FEES_RENTING'"'"', 2);
-    #define('"'"'YAAMP_TXFEE_RENTING_WD'"'"', 0.002);
-    
-    #define('"'"'YAAMP_PAYMENTS_FREQ'"'"', 2*60*60);
-    #define('"'"'YAAMP_PAYMENTS_MINI'"'"', 0.001);
-    
-    #define('"'"'YAAMP_ALLOW_EXCHANGE'"'"', false);
-    #define('"'"'YIIMP_PUBLIC_EXPLORER'"'"', true);
-    #define('"'"'YIIMP_PUBLIC_BENCHMARK'"'"', false);
-    
-    #define('"'"'YIIMP_FIAT_ALTERNATIVE'"'"', '"'"'USD'"'"'); // USD is main
-    #define('"'"'YAAMP_USE_NICEHASH_API'"'"', false);
-    
-    #define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r'"'"');
-    
-    #define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
-    #define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
-    #define('"'"'YAAMP_SITE_NAME'"'"', '"'"'YIIMP'"'"');
-    #define('"'"'YAAMP_ADMIN_EMAIL'"'"', '"'"''"${EMAIL}"''"'"');
-    #define('"'"'YAAMP_ADMIN_IP'"'"', '"'"''"${Public}"''"'"'); // samples: "80.236.118.26,90.234.221.11" or "10.0.0.1/8"
-    
-    #define('"'"'YAAMP_ADMIN_WEBCONSOLE'"'"', true);
-    #define('"'"'YAAMP_CREATE_NEW_COINS'"'"', false);
-    #define('"'"'YAAMP_NOTIFY_NEW_COINS'"'"', false);
-    
-    #define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'x11'"'"');
-    
-    #define('"'"'YAAMP_USE_NGINX'"'"', true);
-    
-    #// Exchange public keys (private keys are in a separate config file)
-    #define('"'"'EXCH_CRYPTOPIA_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_POLONIEX_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_BITTREX_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_BLEUTRADE_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_BTER_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_YOBIT_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_CCEX_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_COINMARKETS_USER'"'"', '"'"''"'"');
-    #define('"'"'EXCH_COINMARKETS_PIN'"'"', '"'"''"'"');
-    #define('"'"'EXCH_BITSTAMP_ID'"'"','"'"''"'"');
-    #define('"'"'EXCH_BITSTAMP_KEY'"'"','"'"''"'"');
-    #define('"'"'EXCH_HITBTC_KEY'"'"','"'"''"'"');
-    #define('"'"'EXCH_KRAKEN_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_LIVECOIN_KEY'"'"', '"'"''"'"');
-    #define('"'"'EXCH_NOVA_KEY'"'"', '"'"''"'"');
-    
-    #// Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
-    #define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
-    
-    #// nicehash keys deposit account & amount to deposit at a time
-    #define('"'"'NICEHASH_API_KEY'"'"','"'"'f96c65a7-3d2f-4f3a-815c-cacf00674396'"'"');
-    #define('"'"'NICEHASH_API_ID'"'"','"'"'825979'"'"');
-    #define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3ABoqBjeorjzbyHmGMppM62YLssUgJhtuf'"'"');
-    #define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
-    
-    #$cold_wallet_table = array(
-	#'"'"'bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r'"'"' => 0.10,
-    #);
-    
-    #// Sample fixed pool fees
-    #$configFixedPoolFees = array(
-    #    '"'"'zr5'"'"' => 2.0,
-    #    '"'"'scrypt'"'"' => 20.0,
-    #    '"'"'sha256'"'"' => 5.0,
-    # );
-     
-    # // Sample fixed pool fees solo
-    #$configFixedPoolFeesSolo = array(
-    #    '"'"'zr5'"'"' => 2.0,
-    #    '"'"'scrypt'"'"' => 20.0,
-    #    '"'"'sha256'"'"' => 5.0,
-        
-    #);
-    
-    #// Sample custom stratum ports
-    #$configCustomPorts = array(
-    #//	'"'"'x11'"'"' => 7000,
-    #);
-    
-    #// mBTC Coefs per algo (default is 1.0)
-    #$configAlgoNormCoef = array(
-    #//	'"'"'x11'"'"' => 5.0,
-    #);
-    #' | sudo -E tee /var/web/serverconfig.php >/dev/null 2>&1
-
-    #echo -e "$GREEN Done...$COL_RESET"
-
 
     # Updating stratum config files with database connection info
     echo
@@ -1108,12 +238,12 @@
     sleep 3
  
     cd /var/stratum/config
-    sudo sed -i 's/password = tu8tu5/password = '$blckntifypass'/g' *.conf
+    sudo sed -i 's/password = tu8tu5/password = '$stratum_password'/g' *.conf
     sudo sed -i 's/server = yaamp.com/server = '$server_name'/g' *.conf
-    sudo sed -i 's/host = yaampdb/host = localhost/g' *.conf
-    sudo sed -i 's/database = yaamp/database = yiimpfrontend/g' *.conf
-    sudo sed -i 's/username = root/username = stratum/g' *.conf
-    sudo sed -i 's/password = patofpaq/password = '$password2'/g' *.conf
+    sudo sed -i 's/host = yaampdb/host = '$server_name'/g' *.conf
+    sudo sed -i 's/database = yaamp/database = '$database_name'/g' *.conf
+    sudo sed -i 's/username = root/username = '$user_database'/g' *.conf
+    sudo sed -i 's/password = patofpaq/password = '$password_database'/g' *.conf
     cd ~
     echo -e "$GREEN Done...$COL_RESET"
 
@@ -1128,55 +258,21 @@
     whoami=`whoami`
     sudo usermod -aG www-data $whoami
     sudo usermod -a -G www-data $whoami
-
-    #sudo find /var/web -type d -exec chmod 775 {} +
-    #sudo find /var/web -type f -exec chmod 664 {} +
-    #sudo chgrp www-data /var/web -R
-    #sudo chmod g+w /var/web -R
-    
-    #sudo mkdir /var/log/yiimp
-    #sudo touch /var/log/yiimp/debug.log
-    #sudo chgrp www-data /var/log/yiimp -R
-    #sudo chmod 775 /var/log/yiimp -R
     
     sudo chgrp www-data /var/stratum -R
     sudo chmod 775 /var/stratum
-
-    sudo mkdir -p /var/yiimp/sauv
-    sudo chgrp www-data /var/yiimp -R
-    sudo chmod 775 /var/yiimp -R
-
 
     #Add to contrab screen-scrypt
     (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-scrypt.sh") | crontab -
     (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-stratum.sh") | crontab -
 
-    #fix error screen main "service"
-    #sudo sed -i 's/service $webserver start/sudo service $webserver start/g' /var/web/yaamp/modules/thread/CronjobController.php
-    #sudo sed -i 's/service nginx stop/sudo service nginx stop/g' /var/web/yaamp/modules/thread/CronjobController.php
-
-    #fix error screen main "backup sql frontend"
-    #sudo sed -i "s|/root/backup|/var/yiimp/sauv|g" /var/web/yaamp/core/backend/system.php
-    #no need for Kudaraidee yiimp repo
-    #sudo sed -i '14d' /var/web/yaamp/defaultconfig.php
-
     #Misc
+	sudo rm -rf $HOME/stratum-install-finish
     sudo mv $HOME/stratum/ $HOME/stratum-install-finish
-    #sudo rm -rf /var/log/nginx/*
+	sudo rm -rf $HOME/daemon_install_script
     
-    #Hold update OpenSSL
-    #If you want remove the hold : sudo apt-mark unhold openssl
-    #sudo apt-mark hold openssl
-
-    #Restart service
+	#Restart service
     sudo systemctl restart cron.service
-    #sudo systemctl restart mysql
-    #sudo systemctl status mysql | sed -n "1,3p"
-    #sudo systemctl restart nginx.service
-    #sudo systemctl status nginx | sed -n "1,3p"
-    #sudo systemctl restart php7.3-fpm.service
-    #sudo systemctl status php7.3-fpm | sed -n "1,3p"
-
 
     echo
     echo -e "$GREEN Done...$COL_RESET"

@@ -67,7 +67,7 @@
 	hide_output sudo apt -y upgrade
 	hide_output sudo apt -y autoremove
 	hide_output sudo apt-get install -y software-properties-common
-	apt_install dialog python3 python3-pip acl nano apt-transport-https figlet
+	hide_output sudo apt install dialog python3 python3-pip acl nano apt-transport-https figlet
 	echo -e "$GREEN Done...$COL_RESET"
 
 	source conf/prerequisite.sh
@@ -95,7 +95,7 @@
 	echo -e "$CYAN Switching to Aptitude $COL_RESET"
 	echo 
 	sleep 3
-	apt_install aptitude
+	hide_output sudo apt install aptitude
 	echo -e "$GREEN Done...$COL_RESET $COL_RESET"
 
 	# Installing other needed files

@@ -84,10 +84,10 @@
 	echo -e "$RED Make sure you double check before hitting enter! Only one shot at these! $COL_RESET"
 	echo
 	read -e -p "Domain Name Stratum in MAIN server (Enter Domain name: stratum.example.com or ip of your server) : " server_name
-	read -e -p "Enter password for Stratum in MAIN server." stratum_password
-	read -e -p "Enter DATABASE name mysql in MAIN server." database_name
-	read -e -p "Enter USER mysql in MAIN server." user_database
-	read -e -p "Enter PASSWORD mysql in MAIN server." password_database
+	read -e -p "Enter password for Stratum in MAIN server : " stratum_password
+	read -e -p "Enter DATABASE name mysql in MAIN server : " database_name
+	read -e -p "Enter USER mysql in MAIN server : " user_database
+	read -e -p "Enter PASSWORD mysql in MAIN server : " password_database
 	read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
 
 	# Switch Aptitude
@@ -105,9 +105,9 @@
 	echo
 	sleep 3
 
-	sudo apt install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+	hide_output sudo apt install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
 	librtmp-dev sendmail mutt screen git
-	sudo apt install pwgen -y
+	hide_output sudo apt install pwgen -y
 	echo -e "$GREEN Done...$COL_RESET"
 	sleep 3
 
@@ -118,14 +118,14 @@
 	echo
 	sleep 3
 
-	sudo apt install build-essential libzmq5 \
+	hide_output sudo apt install build-essential libzmq5 \
 	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-	sudo apt install libminiupnpc10
-	sudo apt install libcanberra-gtk-module libqrencode-dev libzmq3-dev \
+	hide_output sudo apt install libminiupnpc10
+	hide_output sudo apt install libcanberra-gtk-module libqrencode-dev libzmq3-dev \
 	libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
 	hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
 	hide_output sudo apt -y update
-	sudo apt install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+	hide_output sudo apt install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 	echo -e "$GREEN Done...$COL_RESET"
 
 	# Installing Package to compile crypto currency
@@ -137,7 +137,7 @@
 
 	echo -e "$YELLOW Installing additional system files required for daemons...$COL_RESET"
 	hide_output sudo apt-get update
-	sudo apt install build-essential libtool autotools-dev \
+	hide_output sudo apt install build-essential libtool autotools-dev \
 	automake pkg-config libssl-dev libevent-dev bsdmainutils git libboost-all-dev libminiupnpc-dev \
 	libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev \
 	protobuf-compiler libqrencode-dev libzmq3-dev libgmp-dev \

@@ -256,19 +256,24 @@
 	cd $HOME/stratum/blocknotify
 	sudo sed -i 's/tu8tu5/'$stratum_password'/' blocknotify.cpp
 	hide_output sudo make -j$(nproc)
+	sleep 3
 
 	# Compil iniparser
 	cd $HOME/stratum
 	hide_output sudo make -C iniparser/ -j$(nproc)
+	sleep 3
 	
 	# Compil algos
 	hide_output sudo make -C algos/ -j$(nproc)
+	sleep 3
 	
 	# Compil sha3
 	hide_output sudo make -C sha3 -j$(nproc)
+	sleep 3
 	
 	# Compil stratum
 	hide_output sudo make -f Makefile -j$(nproc)
+	sleep 3
 
 	# Copy Files (Blocknotify,iniparser,Stratum)
 	sudo mkdir -p /var/stratum
@@ -278,6 +283,8 @@
 	sudo cp -r $HOME/stratum/bin/. /bin/
 	sudo cp -r $HOME/stratum/blocknotify/blocknotify /usr/bin/
 	sudo cp -r $HOME/stratum/blocknotify/blocknotify /var/stratum/
+	sleep 3
+	
 	#fixing run.sh
 	sudo rm -r /var/stratum/config/run.sh
 	echo '
@@ -294,6 +301,7 @@
 	sudo chmod +x /var/stratum/config/run.sh
 
 	echo -e "$GREEN Done...$COL_RESET"
+	sleep 3
 
 	# Update Timezone
 	echo
@@ -346,6 +354,7 @@
 	#Add to contrab screen-scrypt
 	(crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-scrypt.sh") | crontab -
 	(crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-stratum.sh") | crontab -
+	sleep 3
 
 	#Misc
 	sudo rm -rf $HOME/stratum-install-finish

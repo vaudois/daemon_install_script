@@ -151,7 +151,6 @@
 	echo -e "$GREEN Additional System Files Completed...$COL_RESET"
 
 	echo
-	echo
 	echo -e "$YELLOW Building Berkeley 4.8, this may take several minutes...$COL_RESET"
 	echo
 	sleep 3
@@ -165,7 +164,6 @@
 	sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
 	echo -e "$GREEN Berkeley 4.8 Completed...$COL_RESET"
 
-	echo
 	echo
 	echo -e "$YELLOW Building Berkeley 5.1, this may take several minutes...$COL_RESET"
 	echo
@@ -181,7 +179,6 @@
 	echo -e "$GREEN Berkeley 5.1 Completed...$COL_RESET"
 
 	echo
-	echo
 	echo -e "$YELLOW Building Berkeley 5.3, this may take several minutes...$COL_RESET"
 	echo
 	sleep 3
@@ -196,7 +193,6 @@
 	echo -e "$GREEN Berkeley 5.3 Completed...$COL_RESET"
 
 	echo
-	echo
 	echo -e "$YELLOW Building Berkeley 6.2, this may take several minutes...$COL_RESET"
 	echo
 	sleep 3
@@ -210,7 +206,6 @@
 	sudo rm -r db-6.2.23.tar.gz db-6.2.23
 	echo -e "$GREEN Berkeley 6.2 Completed...$COL_RESET"
 
-	echo
 	echo
 	echo -e "$YELLOW Building OpenSSL 1.0.2g, this may take several minutes...$COL_RESET"
 	echo
@@ -227,7 +222,6 @@
 	echo -e "$GREEN OpenSSL 1.0.2g Completed...$COL_RESET"
 
 	echo
-	echo
 	echo -e "$YELLOW Building bls-signatures, this may take several minutes...$COL_RESET"
 	echo
 	sleep 3
@@ -240,6 +234,10 @@
 	cd $HOME/daemon_setup/tmp
 	sudo rm -r v20181101.zip bls-signatures-20181101
 	echo -e "$GREEN bls-signatures Completed...$COL_RESET"
+	
+	echo
+	echo
+	echo -e "$GREEN Done...$COL_RESET"
 
 	# Test Email
 	echo

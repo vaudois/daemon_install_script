@@ -277,17 +277,19 @@
 	# Compil Blocknotify
 	cd ~
 	hide_output git clone https://github.com/vaudois/stratum
-	cd $HOME/stratum/blocknotify
+	cd stratum/blocknotify
 	sudo sed -i 's/tu8tu5/'$stratum_password'/' blocknotify.cpp
-	hide_output sudo make -j8
-
+	sudo make -j8
+sleep 10
 	# Compil iniparser
-	cd $HOME/stratum/iniparser
-	hide_output sudo make -j8
-
-	cd $HOME/stratum
-
-	hide_output sudo make -j8
+	cd ~
+	cd stratum/iniparser
+	sudo make -j8
+sleep 10
+	# Compil stratum
+	cd ~
+	cd stratum
+	sudo make -j8
 
 	# Copy Files (Blocknotify,iniparser,Stratum)
 	cd $HOME/stratum

@@ -374,6 +374,7 @@
 	sudo rm -rf $HOME/stratum-install-finish
 	sudo mv $HOME/stratum/ $HOME/stratum-install-finish
 	sudo rm -rf $HOME/daemon_install_script
+	sudo rm -rf $HOME/daemon_setup
 
 	#Restart service
 	sudo systemctl restart cron.service

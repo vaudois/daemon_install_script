@@ -106,8 +106,8 @@
 	sleep 3
 
 	hide_output sudo apt install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
-	librtmp-dev sendmail mutt screen git unzip
-	hide_output sudo apt install pwgen -y
+	librtmp-dev sendmail mutt screen git
+	hide_output sudo apt install pwgen unzip -y
 	echo -e "$GREEN Done...$COL_RESET"
 	sleep 3
 
@@ -159,16 +159,16 @@
 	echo
 	sleep 3
 
-	if [[ "$EMAIL" != "" ]]; then
-		echo $EMAIL > sudo tee --append ~/.email
-		echo $EMAIL > sudo tee --append ~/.forward
+	if [[ "$root_email" != "" ]]; then
+		echo $root_email > sudo tee --append ~/.email
+		echo $root_email > sudo tee --append ~/.forward
 
 	if [[ ("$send_email" == "y" || "$send_email" == "Y" || "$send_email" == "") ]]; then
 		echo "This is a mail test for the SMTP Service." > sudo tee --append /tmp/email.message
 		echo "You should receive this !" >> sudo tee --append /tmp/email.message
 		echo "" >> sudo tee --append /tmp/email.message
 		echo "Cheers" >> sudo tee --append /tmp/email.message
-		sudo sendmail -s "SMTP Testing" $EMAIL < sudo tee --append /tmp/email.message
+		sudo sendmail -s "SMTP Testing" $root_email < sudo tee --append /tmp/email.message
 
 		sudo rm -f /tmp/email.message
 		echo "Mail sent"

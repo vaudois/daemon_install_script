@@ -40,13 +40,14 @@
 
 	 #Copy needed files
 	cd
-	sudo mkdir buildcoin
+	sudo mkdir -p $HOME/utils/conf
 	cd $HOME/daemon_install_script
 	sudo cp -r conf/functions.sh /etc/
 	sudo cp -r utils/screen-scrypt.sh /etc/
 	sudo cp -r utils/screen-stratum.sh /etc/
 	sudo cp -r utils/addport.sh /usr/bin/addport
 	sudo cp -r conf/editconf.py /usr/bin/
+	sudo cp -r conf/getip.sh $HOME/utils/conf
 	sudo chmod +x /usr/bin/editconf.py
 	sudo chmod +x /etc/screen-scrypt.sh
 	sudo chmod +x /usr/bin/addport
@@ -76,7 +77,7 @@
 	echo 'PUBLIC_IP='"${PUBLIC_IP}"'
 	PUBLIC_IPV6='"${PUBLIC_IPV6}"'
 	DISTRO='"${DISTRO}"'
-	PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee conf/pool.conf >/dev/null 2>&1
+	PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee $HOME/utils/conf/coin.conf >/dev/null 2>&1
 
 	echo
 	echo

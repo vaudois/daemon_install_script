@@ -74,11 +74,6 @@
 	sleep 3
 	source conf/getip.sh
 
-	echo 'PUBLIC_IP='"${PUBLIC_IP}"'
-	PUBLIC_IPV6='"${PUBLIC_IPV6}"'
-	DISTRO='"${DISTRO}"'
-	PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee $HOME/utils/conf/coin.conf >/dev/null 2>&1
-
 	echo
 	echo
 	echo -e "$RED Make sure you double check before hitting enter! Only one shot at these! $COL_RESET"
@@ -89,6 +84,19 @@
 	read -e -p "Enter USER mysql in MAIN server : " user_database
 	read -e -p "Enter PASSWORD mysql in MAIN server : " password_database
 	read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
+
+	echo 'STORAGE_USER=utils
+	STORAGE_ROOT=/home/utils
+	PUBLIC_IP='"${PUBLIC_IP}"'
+	PUBLIC_IPV6='"${PUBLIC_IPV6}"'
+	DISTRO='"${DISTRO}"'
+	PRIVATE_IP='"${PRIVATE_IP}"'
+	SERVER_STRATUM='"${server_name}"'
+	PASSWORD_STRATUM='"${stratum_password}"'
+	MYSQL_DATABASE='"${database_name}"'
+	MYSQL_USER='"${user_database}"'
+	MYSQL_PASSWORD='"${password_database}"'
+	SUPPORT_MAIL='"${EMAIL}"'' | sudo -E tee $HOME/utils/conf/coin.conf >/dev/null 2>&1
 
 	# Switch Aptitude
 	echo

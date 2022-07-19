@@ -52,6 +52,7 @@ function install_end_message {
     echo -e "$RED   YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION Thanks you!				$COL_RESET"
     echo -e "$CYAN  ---------------------------------------------------------   			$COL_RESET"
     echo
+    cd ~
 }
 
 # terminal art start screen.

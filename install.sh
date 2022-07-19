@@ -40,8 +40,8 @@
 
 	 #Copy needed files
 	cd
-	sudo mkdir -p $HOME/utils/conf
 	cd $HOME/daemon_install_script
+	sudo mkdir -p $HOME/utils/conf
 	sudo cp -r conf/functions.sh /etc/
 	sudo cp -r utils/screen-scrypt.sh /etc/
 	sudo cp -r utils/screen-stratum.sh /etc/

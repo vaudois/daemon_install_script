@@ -30,7 +30,18 @@ function spinner
  		done
  		printf "    \b\b\b\b"
  }
-
+ 
+ function spinning_timer() {
+  animation=( ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ )
+  end=$((SECONDS+NUM))
+  while [ $SECONDS -lt $end ]; do
+    for i in "${animation[@]}"; do
+      echo -ne "${RED}\r$i ${CYAN}${MSG1}${NC}"
+      sleep 0.1
+    done
+  done
+  echo -e "${MSG2}"
+}
 
 # terminal art end screen.
 

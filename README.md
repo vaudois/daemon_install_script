@@ -16,7 +16,7 @@ Use this script on fresh install ubuntu Server 16.04 / 18.04. ``` No other versi
 
 Update and upgrade your system.
 ```
-sudo apt-get update && sudo apt-get upgrade -y
+sudo apt update && sudo apt upgrade -y
 ```
 To create your new user and.
 ```

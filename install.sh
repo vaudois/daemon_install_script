@@ -115,7 +115,7 @@
 	echo
 	sleep 3
 
-	hide_output sudo apt install dialog libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+	hide_output sudo apt install dialog acl libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
 	librtmp-dev sendmail mutt screen git
 	hide_output sudo apt install pwgen unzip -y
 	echo -e "$GREEN Done...$COL_RESET"

@@ -63,11 +63,11 @@
 	echo 
 	sleep 3
 
-	hide_output sudo apt -y update 
-	hide_output sudo apt -y upgrade
-	hide_output sudo apt -y autoremove
-	hide_output sudo apt-get install -y software-properties-common
-	hide_output sudo apt install dialog python3 python3-pip acl nano apt-transport-https figlet
+	sudo apt -y update 
+	sudo apt -y upgrade
+	sudo apt -y autoremove
+	sudo apt-get install -y software-properties-common
+	sudo apt install dialog python3 python3-pip acl nano apt-transport-https figlet
 	echo -e "$GREEN Done...$COL_RESET"
 
 	source conf/prerequisite.sh
@@ -105,7 +105,7 @@
 	echo -e "$CYAN Switching to Aptitude $COL_RESET"
 	echo 
 	sleep 3
-	hide_output sudo apt install aptitude
+	hide_output sudo apt install aptitude dialog
 	echo -e "$GREEN Done...$COL_RESET $COL_RESET"
 
 	# Installing other needed files
@@ -115,7 +115,7 @@
 	echo
 	sleep 3
 
-	hide_output sudo apt install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+	hide_output sudo apt install dialog libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
 	librtmp-dev sendmail mutt screen git
 	hide_output sudo apt install pwgen unzip -y
 	echo -e "$GREEN Done...$COL_RESET"

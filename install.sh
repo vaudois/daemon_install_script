@@ -285,6 +285,7 @@
 	# Compil Blocknotify
 	cd ~
 	hide_output git clone https://github.com/vaudois/stratum
+	sudo chmod -R 777 $HOME/stratum/
 	cd $HOME/stratum/blocknotify
 	sudo sed -i 's/tu8tu5/'$stratum_password'/' blocknotify.cpp
 	hide_output sudo make -j$(nproc)

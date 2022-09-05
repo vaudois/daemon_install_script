@@ -20,6 +20,8 @@
 	echo
 	exit 1;
 	}
+	
+	whoami=`whoami`
 
 	source /etc/functions.sh
 	source $HOME/utils/conf/coin.sh
@@ -60,10 +62,20 @@
 	# Compil sha3
 	hide_output sudo make -C sha3 -j$(nproc)
 	sleep 3
-
+	
+	whoami=`whoami`
+	echo
+	echo -e "$RED Enter password for ROOT server : $COL_RESET"
+	echo
+	su root
+	cd $HOME/$whoami/utils/stratum
+	
 	# Compil stratum
 	hide_output sudo make -f Makefile -j$(nproc)
 	sleep 3
+	
+	su $whoami
+	cd $HOME/stratum
 
 	# Copy Files (Blocknotify,iniparser,Stratum)
 	sudo mkdir -p /var/stratum

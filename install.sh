@@ -86,6 +86,7 @@
 	read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
 
 	echo '
+	#!/bin/bash
 	STORAGE_USER=utils
 	STORAGE_ROOT=/home/utils
 	PUBLIC_IP='"${PUBLIC_IP}"'
@@ -98,7 +99,7 @@
 	MYSQL_USER='"${user_database}"'
 	MYSQL_PASSWORD='"${password_database}"'
 	SUPPORT_MAIL='"${EMAIL}"'
-	' | sudo -E tee $HOME/utils/conf/coin.conf >/dev/null 2>&1
+	' | sudo -E tee $HOME/utils/conf/coin.sh >/dev/null 2>&1
 
 	# Switch Aptitude
 	echo

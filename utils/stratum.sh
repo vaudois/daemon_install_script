@@ -1,11 +1,11 @@
 #!/bin/bash
-################################################################################ 
+################################################################################
 #
 #   Install Stratum OR Update on Ubuntu 16.04/18.04
 #   v0.1 (update September, 2022)
-# 
+#
 ################################################################################
-	
+
 	clear
 
 	output() {
@@ -51,15 +51,15 @@
 	cd $HOME/stratum
 	hide_output sudo make -C iniparser/ -j$(nproc)
 	sleep 3
-	
+
 	# Compil algos
 	hide_output sudo make -C algos/ -j$(nproc)
 	sleep 3
-	
+
 	# Compil sha3
 	hide_output sudo make -C sha3 -j$(nproc)
 	sleep 3
-	
+
 	# Compil stratum
 	hide_output sudo make -f Makefile -j$(nproc)
 	sleep 3
@@ -109,35 +109,6 @@
 	echo -e "$GREEN Done...$COL_RESET"
 	sleep 3
 
-	# Install Daemonbuilder
-	echo
-	echo
-	echo -e "$CYAN => Install DaemonBuilder Coin. $COL_RESET"
-	echo
-
-	echo -e "$CYAN => Installing DaemonBuilder $COL_RESET"
-	cd $HOME/daemon_install_script
-	sudo mkdir -p $HOME/utils/daemon_builder
-	sudo cp -r utils/start.sh $HOME/utils/daemon_builder
-	sudo cp -r utils/menu.sh $HOME/utils/daemon_builder
-	sudo cp -r utils/menu2.sh $HOME/utils/daemon_builder
-	sudo cp -r utils/menu3.sh $HOME/utils/daemon_builder
-	sudo cp -r utils/errors.sh $HOME/utils/daemon_builder
-	sudo cp -r utils/source.sh $HOME/utils/daemon_builder
-	sudo cp -r utils/upgrade.sh $HOME/utils/daemon_builder
-	sleep 3
-	echo '
-	#!/usr/bin/env bash
-	source /etc/functions.sh # load our functions
-	cd $HOME/utils/daemon_builder
-	bash start.sh
-	cd ~
-	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
-	sudo chmod +x /usr/bin/daemonbuilder
-	echo
-	echo -e "$GREEN Done...$COL_RESET"
-	sleep 3
-
 	# Updating stratum config files with database connection info
 	echo
 	echo
@@ -154,7 +125,6 @@
 	sudo sed -i 's/password = patofpaq/password = '$MYSQL_PASSWORD'/g' *.conf
 	cd ~
 	echo -e "$GREEN Done...$COL_RESET"
-
 
 	# Final Directory permissions
 	echo

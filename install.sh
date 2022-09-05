@@ -63,11 +63,11 @@
 	echo 
 	sleep 3
 
-	sudo apt -y update 
-	sudo apt -y upgrade
-	sudo apt -y autoremove
-	sudo apt-get install -y software-properties-common
-	sudo apt install dialog python3 python3-pip acl nano apt-transport-https figlet
+	hide_output sudo apt -y update 
+	hide_output sudo apt -y upgrade
+	hide_output sudo apt -y autoremove
+	hide_output sudo apt-get install -y software-properties-common
+	hide_output sudo apt install -y dialog python3 python3-pip acl nano apt-transport-https figlet
 	echo -e "$GREEN Done...$COL_RESET"
 
 	source conf/prerequisite.sh
@@ -105,7 +105,7 @@
 	echo -e "$CYAN Switching to Aptitude $COL_RESET"
 	echo 
 	sleep 3
-	hide_output sudo apt install aptitude dialog
+	hide_output sudo apt install -y aptitude
 	echo -e "$GREEN Done...$COL_RESET $COL_RESET"
 
 	# Installing other needed files
@@ -115,9 +115,9 @@
 	echo
 	sleep 3
 
-	hide_output sudo apt install dialog acl libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
-	librtmp-dev sendmail mutt screen git
-	hide_output sudo apt install pwgen unzip -y
+	hide_output sudo apt-get -y install dialog acl libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+	librtmp-dev sendmail mutt screen git make
+	hide_output sudo apt -y install pwgen unzip
 	echo -e "$GREEN Done...$COL_RESET"
 	sleep 3
 
@@ -128,14 +128,13 @@
 	echo
 	sleep 3
 
-	hide_output sudo apt install build-essential libzmq5 \
-	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-	hide_output sudo apt install libminiupnpc10
-	hide_output sudo apt install libcanberra-gtk-module libqrencode-dev libzmq3-dev \
+	hide_output sudo apt-get -y install build-essential libzmq5 \
+	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
+	libseccomp-dev libcap-dev libminiupnpc-dev gettext libminiupnpc10 libcanberra-gtk-module libqrencode-dev libzmq3-dev \
 	libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
 	hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
-	hide_output sudo apt -y update
-	hide_output sudo apt install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+	hide_output sudo apt -y update && sudo apt -y upgrade
+	hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 	echo -e "$GREEN Done...$COL_RESET"
 
 	# Installing Package to compile crypto currency
@@ -146,8 +145,8 @@
 	sleep 3
 
 	echo -e "$YELLOW Installing additional system files required for daemons...$COL_RESET"
-	hide_output sudo apt-get update
-	hide_output sudo apt install build-essential libtool autotools-dev \
+	hide_output sudo apt-get -y update
+	hide_output sudo apt -y install build-essential libtool autotools-dev \
 	automake pkg-config libssl-dev libevent-dev bsdmainutils git libboost-all-dev libminiupnpc-dev \
 	libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev \
 	protobuf-compiler libqrencode-dev libzmq3-dev libgmp-dev \

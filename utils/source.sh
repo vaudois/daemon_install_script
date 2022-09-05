@@ -371,14 +371,14 @@ echo "I am now going to open nano, please copy and paste the config from yiimp i
 read -n 1 -s -r -p "Press any key to continue"
 sudo nano $HOME/wallets/."${coind::-1}"/${coind::-1}.conf
 clear
-cd $HOME/yiimpool/daemon_builder
+cd $HOME/utils/daemon_builder
 echo "Starting ${coind::-1}"
 "${coind}" -datadir=$HOME/wallets/."${coind::-1}" -conf="${coind::-1}.conf" -daemon -shrinkdebugfile
 
 # If we made it this far everything built fine removing last coin.conf and build directory
 sudo rm -r $HOME/utils/daemon_builder/temp_coin_builds/.lastcoin.conf
 sudo rm -r $HOME/utils/daemon_builder/temp_coin_builds/${coindir}
-sudo rm -r $HOME/yiimpool/daemon_builder/.my.cnf
+sudo rm -r $HOME/utils/daemon_builder/.my.cnf
 
 
 clear

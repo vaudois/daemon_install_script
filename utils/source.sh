@@ -297,15 +297,15 @@ if [[ ("$unix" == "true") ]]; then
   else
     echo  "Wow even the /src/obj/zerocoin is there! Good job developer!"
   fi
-cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/leveldb
-sudo chmod +x build_detect_platform
-sudo make clean
-sudo make libleveldb.a libmemenv.a
-cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src
-sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
-sed -i '/USE_UPNP:=1/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
-make -j$NPROC -f makefile.unix USE_UPNP=-
-fi
+		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/leveldb
+		sudo chmod +x build_detect_platform
+		sudo make clean
+		sudo make libleveldb.a libmemenv.a
+		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src
+		sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
+		sed -i '/USE_UPNP:=1/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
+		make -j$NPROC -f makefile.unix USE_UPNP=-
+	fi
 fi
 
 clear
@@ -317,37 +317,28 @@ read -r -e -p "Please enter the coind name from the directory above, example bit
 read -r -e -p "Is there a coin-cli, example bitcoin-cli [y/N] :" ifcoincli
 
 if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
-read -r -e -p "Please enter the coin-cli name :" coincli
-fi
-
-if [[ ("$berkeley" == "6.2") ]]; then
-read -r -e -p "Is there a coin-tools, example bitcoin-wallet-tools [y/N] :" ifcointools
-
-if [[ ("$ifcointools" == "y" || "$ifcointools" == "Y") ]]; then
-read -r -e -p "Please enter the coin-tools name :" cointools
-
-sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointools}
-sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointools} /usr/bin
+	read -r -e -p "Please enter the coin-cli name :" coincli
 fi
 
 read -r -e -p "Is there a coin-tx, example bitcoin-tx [y/N] :" ifcointx
 
 if [[ ("$ifcointx" == "y" || "$ifcointx" == "Y") ]]; then
-read -r -e -p "Please enter the coin-tx name :" cointx
-
-sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointx}
-sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointx} /usr/bin
+	read -r -e -p "Please enter the coin-tx name :" cointx
 fi
 
-read -r -e -p "Is there a coin-gtest, example bitcoin-gtest [y/N] :" ifcoingtest
 
-if [[ ("$ifcoingtest" == "y" || "$ifcoingtest" == "Y") ]]; then
-read -r -e -p "Please enter the coin-gtest name :" coingtest
+if [[ ("$berkeley" == "6.2") ]]; then
+	read -r -e -p "Is there a coin-tools, example bitcoin-wallet-tools [y/N] :" ifcointools
 
-sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coingtest}
-sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coingtest} /usr/bin
-fi
+	if [[ ("$ifcointools" == "y" || "$ifcointools" == "Y") ]]; then
+		read -r -e -p "Please enter the coin-tools name :" cointools
+	fi
 
+	read -r -e -p "Is there a coin-gtest, example bitcoin-gtest [y/N] :" ifcoingtest
+
+	if [[ ("$ifcoingtest" == "y" || "$ifcoingtest" == "Y") ]]; then
+		read -r -e -p "Please enter the coin-gtest name :" coingtest
+	fi
 fi
 
 clear
@@ -356,13 +347,28 @@ clear
 sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coind}
 sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coind} /usr/bin
 if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
-  sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coincli}
-  sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coincli} /usr/bin
+	sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coincli}
+	sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coincli} /usr/bin
+fi
+
+if [[ ("$ifcointx" == "y" || "$ifcointx" == "Y") ]]; then
+	sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointx}
+	sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointx} /usr/bin
+fi
+
+if [[ ("$ifcointools" == "y" || "$ifcointools" == "Y") ]]; then
+	sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointools}
+	sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${cointools} /usr/bin
+fi
+
+if [[ ("$ifcoingtest" == "y" || "$ifcoingtest" == "Y") ]]; then
+	sudo strip $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coingtest}
+	sudo cp $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/${coingtest} /usr/bin
 fi
 
 # Make the new wallet folder have user paste the coin.conf and finally start the daemon
 if [[ ! -e '$HOME/wallets' ]]; then
-  sudo mkdir -p $HOME/wallets
+	sudo mkdir -p $HOME/wallets
 fi
 
 sudo setfacl -m u:$USER:rwx $HOME/wallets

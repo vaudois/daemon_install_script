@@ -312,7 +312,7 @@ clear
 
 # LS the SRC dir to have user input bitcoind and bitcoin-cli names
 cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/
-find . -maxdepth 1 -type f \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+find . -maxdepth 1 -type f ! -name "*.*" \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
 read -r -e -p "Please enter the coind name from the directory above, example bitcoind :" coind
 read -r -e -p "Is there a coin-cli, example bitcoin-cli [y/N] :" ifcoincli
 

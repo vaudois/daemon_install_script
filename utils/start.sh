@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 #####################################################
 # This is the entry point for configuring the system.
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by afiniel for crypto use...
+# Updated by Vaudois for crypto use...
 #####################################################
 
-source /etc/functions.sh # load our functions
+FUNC=/etc/functionscoin.sh
+if [[ ! -f "$FUNC" ]]; then
+	source /etc/functions.sh # load our functions
+else
+	source /etc/functionscoin.sh # load our functions
+fi
 
 cd $HOME/utils/daemon_builder
 # Ensure Python reads/writes files in UTF-8. If the machine

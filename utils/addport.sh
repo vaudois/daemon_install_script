@@ -29,7 +29,7 @@ function EPHYMERAL_PORT(){
 
 coinport=$(EPHYMERAL_PORT)
 
-cd /var/stratum/config
+cd ${PATH_STRATUM}/config
 echo -e "$YELLOW Thanks for using the addport script by Vaudois. $COL_RESET"
 echo
 echo -e "$YELLOW addport will randomly selects an open port for the coin between ports 2768 and 6999 and open the port in UFW. $COL_RESET"

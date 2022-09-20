@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 #####################################################
-# Source code https://github.com/end222/pacmenu
-# Updated by afiniel for crypto use...
+# Updated by Vaudois for crypto use...
 #####################################################
 
-source /etc/functions.sh
+FUNC=/etc/functionscoin.sh
+if [[ ! -f "$FUNC" ]]; then
+	source /etc/functions.sh
+else
+	source /etc/functionscoin.sh
+fi
 cd $HOME/utils/daemon_builder
 
 RESULT=$(dialog --stdout --title "Daemon Builder Coin" --menu "Choose one" -1 60 7 \

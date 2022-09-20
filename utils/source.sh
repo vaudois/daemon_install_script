@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #####################################################
-# Created by afiniel for crypto use...
+# Created by Vaudois for crypto use...
 #####################################################
 
 FUNC=/etc/functionscoin.sh
